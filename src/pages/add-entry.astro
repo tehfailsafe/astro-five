@@ -1,0 +1,53 @@
+---
+// export const prerender = false;
+
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "../lib/supabase";
+
+// Handle form submission
+if (Astro.request.method === "POST") {
+  try {
+    const formData = await Astro.request.formData();
+    const content = formData.get("content");
+
+    if (!content) {
+      throw new Error("No content provided");
+    }
+
+    const entries = JSON.parse(content.toString());
+    const { data, error } = await supabase.from("bif_entries").insert(entries);
+
+    if (error) throw error;
+    return Astro.redirect("/", 303); // Redirect to home page on success
+  } catch (error) {
+    console.error("Error adding entry:", error);
+    return new Response(`Error: ${error.message}`, {
+      status: 400,
+    });
+  }
+}
+---
+
+<Layout>
+  <div class="container mx-auto">
+    <h1>Add New Entry</h1>
+    <form method="POST" class="space-y-4">
+      <label for="content" class="block text-sm font-medium text-gray-700"
+        >Paste Entry JSON:</label
+      >
+      <textarea
+        class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        id="content"
+        name="content"
+        rows="10"
+        placeholder='{"name": "Mi Dia From Scratch", "category": "Tex Mex", ...}'
+      ></textarea>
+      <button
+        type="submit"
+        class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</Layout>

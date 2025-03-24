@@ -1,0 +1,17 @@
+---
+const {
+  action,
+  method = "POST",
+  enctype = "application/x-www-form-urlencoded",
+} = Astro.props;
+---
+
+<form
+  class="bg-prairie-100 p-lg rounded-default shadow-soft"
+  action={action}
+  method={method}
+  enctype={enctype}
+>
+  <slot />
+  <!-- Inputs, buttons, etc. -->
+</form>

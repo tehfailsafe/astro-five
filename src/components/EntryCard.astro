@@ -1,0 +1,61 @@
+---
+const {
+  name,
+  description,
+  address,
+  category,
+  phone,
+  website,
+  rating,
+  review_count,
+  is_featured,
+} = Astro.props;
+
+import { slugify } from "../lib/utils";
+---
+
+<article class="bg-white p-md rounded-default shadow-soft">
+  <h2 class="text-wildflower-500 font-heading text-xl mb-sm">{name}</h2>
+  <p class="text-stone-700 mb-sm">{description}</p>
+  <p class="text-stone-400 text-sm">{address}</p>
+  <div class="flex justify-between items-start mt-md">
+    <div>
+      <p class="text-stone-700 mb-2">{category}</p>
+      <p class="text-stone-400 text-sm">
+        <span class="font-medium">Phone:</span>{" "}
+        <a href={`tel:${phone}`} class="text-lake-600 hover:text-lake-300">
+          {phone}
+        </a>
+      </p>
+      {
+        website && (
+          <p class="text-stone-400 text-sm">
+            <span class="font-medium">Website:</span>{" "}
+            <a
+              href={website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-lake-600 hover:text-lake-300"
+            >
+              Visit Website
+            </a>
+          </p>
+        )
+      }
+    </div>
+    <div class="flex items-center bg-prairie-200 px-3 py-1 rounded-full">
+      <span class="text-wildflower-500 font-medium">
+        {rating} ★
+      </span>
+      <span class="text-stone-400 text-sm ml-2">
+        ({review_count} reviews)
+      </span>
+    </div>
+  </div>
+  <a
+    href={`/tex-mex/${slugify(name)}`}
+    class="text-lake-600 hover:text-lake-300 text-sm mt-2 inline-block"
+  >
+    View Details
+  </a>
+</article>

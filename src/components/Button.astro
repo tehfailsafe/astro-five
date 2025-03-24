@@ -1,0 +1,12 @@
+---
+const { type = "button", href } = Astro.props;
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class="bg-wildflower-500 text-white px-4 py-2 rounded-default font-heading font-medium hover:bg-wildflower-700 transition-colors"
+  type={href ? null : type}
+  href={href}
+>
+  <slot />
+</Tag>

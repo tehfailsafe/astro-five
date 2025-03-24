@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #E07A5F;
+    --color-secondary: #D9A057;
+    --color-accent: #3D8C87;
+    --color-background: #FFF8E8;
+    --color-surface: #FFFFFF;
+    --color-text: #4A3F35;
+    --color-muted: #8A817C;
+    
+    --elevation-one: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --elevation-two: 0 4px 8px rgba(0, 0, 0, 0.15);
+    
+    --font-body: Inter, Arial, sans-serif;
+    --font-display: Poppins, sans-serif;
+}
